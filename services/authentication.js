@@ -2,8 +2,7 @@ var User = require('./../models/Users');
 var jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-module.exports = function(){
-    return function(req,res,next){
+module.exports = function(req,res,next){
         if (!req.headers || !req.headers.token) {
             return res.status(401).json({
                 message: "No session data found",
@@ -36,4 +35,3 @@ module.exports = function(){
                 });
         }
     }
-}

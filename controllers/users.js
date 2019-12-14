@@ -20,7 +20,7 @@ module.exports={
         // }
         
         let { email, userName } = req.user;
-
+        console.log(`${email}     ${userName}`)
             return res.status(200).json({
                 message: "Profile Data",
                 data: {
@@ -34,9 +34,9 @@ module.exports={
     //Set like on recipe
     toggleLike: function(req,res,next){
         let {recipe_id} = req.body;
-        let { email } = req.headers.token;
+        let { email, userName } = req.user;
 
-        User.findOne({email: email})
+        User.findOne({email})
         .then((user)=>{
             if(!user)
                 return res.status(442).json({
@@ -84,9 +84,10 @@ module.exports={
     //Set dislike on recipe
     toggleDislike: function(req,res,next){
         let {recipe_id} = req.body;
-        let { email } = req.headers.token;
+        let { email, userName } = req.user;
 
-        User.findOne({email: email}).then((user)=>{
+        User.findOne({email})
+        .then((user)=>{
             if(!user)
                 return res.status(442).json({
                     message: "Invalid User",
@@ -128,9 +129,9 @@ module.exports={
     //Set Favourites
     toggleFavourites: function(req,res,next){
         let {recipe_id} = req.body;
-        let { email } = req.headers.token;
+        let { email, userName } = req.user;
 
-        User.findOne({email: email})
+        User.findOne({email})
         .then((user)=>{
             if(!user)
                 return res.status(442).json({
@@ -164,9 +165,10 @@ module.exports={
         });
     },
     getLikesList: function(req,res,next){
-        let { email } = req.headers.token;
+        let { email, userName } = req.user;
 
-        User.findOne({email: email}).then((user)=>{
+        User.findOne({email})
+        .then((user)=>{
             if(!user)
                 return res.status(442).json({
                     message: "Invalid User",
@@ -179,9 +181,9 @@ module.exports={
         })
     },
     getFavouritesList: function(req,res,next){
-        let { email } = req.headers.token;
+        let { email, userName } = req.user;
 
-        User.findOne({email: email})
+        User.findOne({email})
         .then((user)=>{
             if(!user)
                 return res.status(442).json({

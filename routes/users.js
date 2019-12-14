@@ -141,7 +141,7 @@ router.post('/toggleFavourites',authenticate,toggleFavouritesController);
  *     HTTP/1.1 200 OK
  *     {
           message: "List of likes",
-          data: data: {likes: user.likes}
+          data: {likes: user.likes}
  *     }
  *
  * @apiError AuthenticationError Code 442 Token Error
@@ -168,7 +168,7 @@ router.post('/getLikesList',authenticate,getLikesListController);
  *     HTTP/1.1 200 OK
  *     {
           message: "List of favourites",
-          data: data: {likes: user.favourites}
+          data: {favourites: user.favourites}
  *     }
  *
  * @apiError AuthenticationError Code 442 Token Error
@@ -181,6 +181,6 @@ router.post('/getLikesList',authenticate,getLikesListController);
  *        "data": ""
  *     }
  */
-router.post('/getFavouritesList',authenticate,getLikesListController);
+router.post('/getFavouritesList',authenticate,getFavouritesListController);
 
 module.exports = router;

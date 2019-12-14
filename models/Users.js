@@ -8,7 +8,10 @@ var userData = new Schema({
     verificationCode: String,
     isVerified: {type: Boolean, default: false},
     passwordResetCode: String,
-    passwordExpiryDate: Date
+    passwordExpiryDate: Date,
+    likes: [String],
+    favourites: [String],
+    dislikes: [String]
 });
 
 module.exports = mongoose.model('Users', userData);
