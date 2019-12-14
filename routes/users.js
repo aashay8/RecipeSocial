@@ -17,7 +17,7 @@ var authenticate = require('./../services/authentication')
  * @apiGroup Users
  *
  * @apiSuccess {String} message Profile Data
- * @apiSuccess {String} data {userName, userEmail}
+ * @apiSuccess {String} data {userName, email}
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -101,7 +101,7 @@ router.post('/toggleLike',authenticate,toggleLikeController);
 router.post('/toggleDislike',authenticate,toggleDislikeController);
 
 /**
- * @api {post} /toggleFavourites Toggle addition/removal from recipe
+ * @api {post} /toggleFavourites Toggle addition/removal from favourites
  * @apiName Toggle favourites
  * @apiGroup Users
  *
@@ -141,7 +141,7 @@ router.post('/toggleFavourites',authenticate,toggleFavouritesController);
  *     HTTP/1.1 200 OK
  *     {
           message: "List of likes",
-          data: {likes: user.likes}
+          data: {likes: [String]}
  *     }
  *
  * @apiError AuthenticationError Code 442 Token Error
@@ -162,13 +162,13 @@ router.post('/getLikesList',authenticate,getLikesListController);
  * @apiGroup Users
  *
  * @apiSuccess {String} message List of favourites
- * @apiSuccess {String} data {"likes":[<Array of recipe ids>]}
+ * @apiSuccess {String} data {"favourites":[<Array of recipe ids>]}
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
           message: "List of favourites",
-          data: {favourites: user.favourites}
+          data: {favourites: [String]}
  *     }
  *
  * @apiError AuthenticationError Code 442 Token Error

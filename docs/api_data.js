@@ -396,14 +396,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "data",
-            "description": "<p>{userName, userEmail}</p>"
+            "description": "<p>{userName, email}</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"Profile Data\",\n      data: {\n        userName: users[i].userName,\n        userEmail: users[i].email\n      }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"Profile Data\",\n      data: {\n        userName: user.userName,\n        email: user.email\n      }\n}",
           "type": "json"
         }
       ]
@@ -452,14 +452,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "data",
-            "description": "<p>{&quot;likes&quot;:[<Array of recipe ids>]}</p>"
+            "description": "<p>{&quot;favourites&quot;:[<Array of recipe ids>]}</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"List of favourites\",\n      data: data: {likes: user.favourites}\n}",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"List of favourites\",\n      data: {favourites: [String]}\n}",
           "type": "json"
         }
       ]
@@ -515,7 +515,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"List of likes\",\n      data: data: {likes: user.likes}\n}",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"List of likes\",\n      data: {likes: [String]}\n}",
           "type": "json"
         }
       ]
@@ -684,7 +684,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/toggleFavourites",
-    "title": "Toggle addition/removal from recipe",
+    "title": "Toggle addition/removal from favourites",
     "name": "Toggle_favourites",
     "group": "Users",
     "parameter": {
