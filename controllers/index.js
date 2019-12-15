@@ -149,11 +149,10 @@ module.exports = {
                         userName: user.userName,
                         token: jwt.sign({
                             email: user.email, 
-                            userName: user.userName,
-                            likes: user.likes,
-                            dislikes: user.dislikes,
-                            favourites: user.favourites    
-                        }, process.env.JWT_SECRET)
+                            userName: user.userName}, process.env.JWT_SECRET),
+                        likes: user.likes,
+                        dislikes: user.dislikes,
+                        favourites: user.favourites
                     }
                 });
         })
