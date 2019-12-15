@@ -24,13 +24,14 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true},(err,result)=>{
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'ejs');
 app.set('view engine','html');
 app.use(express.static(path.join(__dirname, 'docs')));
 
 app.get("/docs",function(req, res){
-    res.sendFile('docs/index.html');
+    res.sendFile(path.join(__dirname,'/docs/index.html'));
 });
+
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
