@@ -71,17 +71,14 @@ router.post('/register', validate(register),registerController);
  *     {
           message: "Successful login",
           data: {
-                    userName: users[i].userName,
-                    token: jwt.sign(users[i].email, process.env.JWT_SECRET)
+                    userName: <String>,
+                    token: jwt String of user data
                 }
  *     }
  *     HTTP/1.1 200 OK
  *     {
           message: "User already logged in.",
-          data: {
-                    email: decoded.user.email,
-                    token: jwt.sign(decoded.user.email, process.env.JWT_SECRET)
-                }
+          data: ""
  *     }
  *
  * @apiError VerificationError Code 200 Account not verified 
@@ -92,7 +89,7 @@ router.post('/register', validate(register),registerController);
  *     HTTP/1.1 502 Authentication Error
  *     {
  *        message: "Account not verified",
- *        data: {token: jwt.sign({login_count: login_count+1}, process.env.JWT_SECRET)}
+ *        data: JWT String of {login_count: <Number>}
  *     }
  */
 router.post('/login', validate(login),loginController);

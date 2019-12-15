@@ -113,10 +113,7 @@ module.exports = {
                     else if(decoded.email){
                         res.status(200).json({
                             message: "User already logged in.",
-                            data: { 
-                                email: decoded.email,
-                                token: jwt.sign({email: decoded.email}, process.env.JWT_SECRET)
-                            }
+                            data: ""
                         })
                     }
                 }
@@ -150,7 +147,13 @@ module.exports = {
                     message: "Successful login",
                     data: {
                         userName: user.userName,
-                        token: jwt.sign({email: user.email, userName: user.userName}, process.env.JWT_SECRET)
+                        token: jwt.sign({
+                            email: user.email, 
+                            userName: user.userName,
+                            likes: user.likes,
+                            dislikes: user.dislikes,
+                            favourites: user.favourites    
+                        }, process.env.JWT_SECRET)
                     }
                 });
         })

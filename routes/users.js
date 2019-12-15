@@ -24,8 +24,8 @@ var authenticate = require('./../services/authentication')
  *     {
           message: "Profile Data",
           data: {
-            userName: user.userName,
-            email: user.email
+            userName: userName,
+            email: email
           }
  *     }
  *
