@@ -49,13 +49,13 @@ router.post('/profile',authenticate,profileController);
  *
  * @apiParam {String} recipe_id Recipe ID to toggle Like status
  * 
- * @apiSuccess {String} message Like set
+ * @apiSuccess {String} message success
  * @apiSuccess {String} data
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
-          message: "Success",
+          message: "success",
           data: ""
  *     }
  *
@@ -79,13 +79,13 @@ router.post('/toggleLike',authenticate,toggleLikeController);
  *
  * @apiParam {String} recipe_id Recipe ID to toggle Like status
  * 
- * @apiSuccess {String} message Dislike set
+ * @apiSuccess {String} message success
  * @apiSuccess {String} data
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
-          message: "Success",
+          message: "success",
           data: ""
  *     }
  *
@@ -108,13 +108,13 @@ router.post('/toggleDislike',authenticate,toggleDislikeController);
  *
  * @apiParam {String} recipe_id Recipe ID to toggle Like status
  * 
- * @apiSuccess {String} message Favourite set
+ * @apiSuccess {String} message success
  * @apiSuccess {String} data
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
-          message: "Success",
+          message: "success",
           data: ""
  *     }
  *

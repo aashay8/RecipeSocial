@@ -76,7 +76,7 @@ module.exports={
             }
             
             return res.status(200).json({
-                message: "Success",
+                message: "success",
                 data: ''
             })
         });
@@ -121,7 +121,7 @@ module.exports={
             }
 
             return res.status(200).json({
-                message: "Success",
+                message: "success",
                 data: ''
             })
         });
@@ -160,7 +160,7 @@ module.exports={
             }
             
             return res.status(200).json({
-                message: "Success",
+                message: "success",
                 data: ''
             })
         });
