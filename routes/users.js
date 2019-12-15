@@ -6,7 +6,8 @@ var {
     toggleDislike: toggleDislikeController,
     toggleFavourites: toggleFavouritesController,
     getLikesList: getLikesListController,
-    getFavouritesList: getFavouritesListController 
+    getFavouritesList: getFavouritesListController,
+    getPreferenceList: getPreferenceListController
 } = require('./../controllers/users')
 
 var authenticate = require('./../services/authentication')
@@ -54,7 +55,7 @@ router.post('/profile',authenticate,profileController);
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
-          message: "Like Set",
+          message: "Success",
           data: ""
  *     }
  *
@@ -84,7 +85,7 @@ router.post('/toggleLike',authenticate,toggleLikeController);
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
-          message: "Dislike Set",
+          message: "Success",
           data: ""
  *     }
  *
@@ -113,7 +114,7 @@ router.post('/toggleDislike',authenticate,toggleDislikeController);
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
-          message: "Favourite set",
+          message: "Success",
           data: ""
  *     }
  *
@@ -182,5 +183,36 @@ router.post('/getLikesList',authenticate,getLikesListController);
  *     }
  */
 router.post('/getFavouritesList',authenticate,getFavouritesListController);
+
+/**
+ * @api {post} /getPreferenceList Retrieve list of preferences posts
+ * @apiName Retrieve list of preferences
+ * @apiGroup Users
+ *
+ * @apiSuccess {String} message List of preferences
+ * @apiSuccess {String} data {"likes":[<Array of recipe ids>], "dislikes":[<Array of recipe ids>], "favourites":[<Array of recipe ids>]}
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+          message: "List of preferences",
+          data: {
+            "likes":[<Array of recipe ids>], 
+            "dislikes":[<Array of recipe ids>], 
+            "favourites":[<Array of recipe ids>]
+          }
+ *     }
+ *
+ * @apiError AuthenticationError Code 442 Token Error
+ * @apiError AuthenticationError Code 442 Invalid User
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 442 Authentication Error
+ *     {
+ *       "message": "Invalid User",
+ *        "data": ""
+ *     }
+ */
+router.post('/getPreferenceList',authenticate,getPreferenceListController);
 
 module.exports = router;

@@ -76,7 +76,7 @@ module.exports={
             }
             
             return res.status(200).json({
-                message: "Like set",
+                message: "Success",
                 data: ''
             })
         });
@@ -121,7 +121,7 @@ module.exports={
             }
 
             return res.status(200).json({
-                message: "Dislike set",
+                message: "Success",
                 data: ''
             })
         });
@@ -160,7 +160,7 @@ module.exports={
             }
             
             return res.status(200).json({
-                message: "Favourite set",
+                message: "Success",
                 data: ''
             })
         });
@@ -196,20 +196,25 @@ module.exports={
                 data: {likes: user.favourites }
             })
         })
-    }
-    // getProfileDetails: function(req,res,next){
-    //     let { email } = req.headers.token;
+    },
+    getPreferenceList: function(req,res,next){
+        let { email, userName } = req.user;
 
-    //     User.findOne({email: email}).then((user)=>{
-    //         if(!user)
-    //             return res.status(442).json({
-    //                 message: "Invalid User",
-    //                 data: ""
-    //             });
-    //         return res.status(200).json({
-    //             message: "List of likes",
-    //             data: {likes: user.likes }
-    //         })
-    //     })
-    // },
+        User.findOne({email})
+        .then((user)=>{
+            if(!user)
+                return res.status(442).json({
+                    message: "Invalid User",
+                    data: ""
+                });
+            return res.status(200).json({
+                message: "List of preferences",
+                data: {
+                        likes: user.likes,
+                        dislikes: user.dislikes,
+                        favourites: user.favourites
+                    }
+            })
+        })
+    }
 }
