@@ -44,11 +44,12 @@ module.exports={
                     data: ""
                 })
             //No likes set yet    
-            if(Object.keys(user).indexOf('likes') == -1){
+            if(!('likes' in user)){
+                
                 user.likes = [];
                 user.likes.push(recipe_id);
                 //Remove from dislikes
-                if(Object.keys(user).indexOf('dislikes') != -1){
+                if('dislikes' in user){
                     if(user.dislikes.indexOf(recipe_id) != -1){
                         user.dislikes = user.dislikes.filter(v=> v!=recipe_id);
                     }
@@ -60,7 +61,7 @@ module.exports={
                 //Like not present for selected recipe 
                 if(user.likes.indexOf(recipe_id) == -1){
                     user.likes.push(recipe_id);
-                    if(Object.keys(user).indexOf('dislikes') != -1){
+                    if('dislikes' in user){
                         if(user.dislikes.indexOf(recipe_id) != -1){
                             user.dislikes = user.dislikes.filter(v=> v!=recipe_id);
                         }
@@ -93,16 +94,16 @@ module.exports={
                     message: "Invalid User",
                     data: ""
                 })
-
-                if(Object.keys(user).indexOf('likes') != -1){
-                    if(user.likes.indexOf(recipe_id) != -1){
-                        user.likes = user.likes.filter(v=> v!=recipe_id);
-                    }
+            //Remove selected recipe from likes list
+            if('likes' in user){
+                if(user.likes.indexOf(recipe_id) != -1){
+                    user.likes = user.likes.filter(v=> v!=recipe_id);
+                }
+            }
             //No previous dislikes on post
-            if(Object.keys(user).indexOf('dislikes') == -1){
+            if(!('dislikes' in user)){
                 user.dislikes = [];
                 user.dislikes.push(recipe_id);               
-                }
                 user.save();
             }
             //Previous dislikes present
@@ -139,7 +140,7 @@ module.exports={
                     data: ""
                 })
             //No favourites set yet    
-            if(Object.keys(user).indexOf('favourites') == -1){
+            if(!('favourites' in user)){
                 user.favourites = [];
                 user.favourites.push(recipe_id);
                 user.save();
