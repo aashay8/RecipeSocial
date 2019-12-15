@@ -56,7 +56,11 @@ router.post('/profile',authenticate,profileController);
  *     HTTP/1.1 200 OK
  *     {
           message: "success",
-          data: ""
+          data: {
+                    likes: [Array of liked recipes],
+                    dislikes: [Array of disliked recipes],
+                    favourites: [Array of favourited recipes]
+                }
  *     }
  *
  * @apiError AuthenticationError Code 442 Token Error
@@ -86,7 +90,11 @@ router.post('/toggleLike',authenticate,toggleLikeController);
  *     HTTP/1.1 200 OK
  *     {
           message: "success",
-          data: ""
+          data: {
+                    likes: [Array of liked recipes],
+                    dislikes: [Array of disliked recipes],
+                    favourites: [Array of favourited recipes]
+                }
  *     }
  *
  * @apiError AuthenticationError Code 442 Token Error
@@ -115,7 +123,11 @@ router.post('/toggleDislike',authenticate,toggleDislikeController);
  *     HTTP/1.1 200 OK
  *     {
           message: "success",
-          data: ""
+          data: {
+                    likes: [Array of liked recipes],
+                    dislikes: [Array of disliked recipes],
+                    favourites: [Array of favourited recipes]
+                }
  *     }
  *
  * @apiError AuthenticationError Code 442 Token Error

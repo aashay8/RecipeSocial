@@ -35,7 +35,7 @@ module.exports={
     toggleLike: function(req,res,next){
         let {recipe_id} = req.body;
         let { email, userName } = req.user;
-
+        
         User.findOne({email})
         .then((user)=>{
             if(!user)
@@ -77,7 +77,11 @@ module.exports={
             
             return res.status(200).json({
                 message: "success",
-                data: ''
+                data: {
+                    likes: user.likes,
+                    dislikes: user.dislikes,
+                    favourites: user.favourites
+                }
             })
         });
     },
@@ -86,7 +90,7 @@ module.exports={
     toggleDislike: function(req,res,next){
         let {recipe_id} = req.body;
         let { email, userName } = req.user;
-
+        let lists = {}
         User.findOne({email})
         .then((user)=>{
             if(!user)
@@ -122,7 +126,11 @@ module.exports={
 
             return res.status(200).json({
                 message: "success",
-                data: ''
+                data: {
+                    likes: user.likes,
+                    dislikes: user.dislikes,
+                    favourites: user.favourites
+                }
             })
         });
     },
@@ -161,7 +169,11 @@ module.exports={
             
             return res.status(200).json({
                 message: "success",
-                data: ''
+                data: {
+                    likes: user.likes,
+                    dislikes: user.dislikes,
+                    favourites: user.favourites
+                }
             })
         });
     },

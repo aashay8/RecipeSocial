@@ -178,7 +178,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"Successful login\",\n      data: {\n                userName: users[i].userName,\n                token: jwt.sign(users[i].email, process.env.JWT_SECRET)\n            }\n}\nHTTP/1.1 200 OK\n{\n      message: \"User already logged in.\",\n      data: {\n                email: decoded.user.email,\n                token: jwt.sign(decoded.user.email, process.env.JWT_SECRET)\n            }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"Successful login\",\n      data: {\n                userName: <String>,\n                token: jwt String of user data\n            }\n}\nHTTP/1.1 200 OK\n{\n      message: \"User already logged in.\",\n      data: \"\"\n}",
           "type": "json"
         }
       ]
@@ -209,7 +209,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 502 Authentication Error\n{\n   message: \"Account not verified\",\n   data: {token: jwt.sign({login_count: login_count+1}, process.env.JWT_SECRET)}\n}",
+          "content": "HTTP/1.1 502 Authentication Error\n{\n   message: \"Account not verified\",\n   data: JWT String of {login_count: <Number>}\n}",
           "type": "json"
         }
       ]
@@ -403,7 +403,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"Profile Data\",\n      data: {\n        userName: user.userName,\n        email: user.email\n      }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"Profile Data\",\n      data: {\n        userName: userName,\n        email: email\n      }\n}",
           "type": "json"
         }
       ]
@@ -545,6 +545,62 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/getPreferenceList",
+    "title": "Retrieve list of preferences posts",
+    "name": "Retrieve_list_of_preferences",
+    "group": "Users",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>List of preferences</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>{&quot;likes&quot;:[<Array of recipe ids>], &quot;dislikes&quot;:[<Array of recipe ids>], &quot;favourites&quot;:[<Array of recipe ids>]}</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"List of preferences\",\n      data: {\n        \"likes\":[<Array of recipe ids>], \n        \"dislikes\":[<Array of recipe ids>], \n        \"favourites\":[<Array of recipe ids>]\n      }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "AuthenticationError",
+            "description": "<p>Code 442 Token Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 442 Authentication Error\n{\n  \"message\": \"Invalid User\",\n   \"data\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/users.js",
+    "groupTitle": "Users"
+  },
+  {
+    "type": "post",
     "url": "/toggleLike",
     "title": "Like or Remove like from a recipe",
     "name": "Toggle_Dislike",
@@ -570,7 +626,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>Like set</p>"
+            "description": "<p>success</p>"
           },
           {
             "group": "Success 200",
@@ -584,7 +640,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"Like Set\",\n      data: \"\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"success\",\n      data: \"\"\n}",
           "type": "json"
         }
       ]
@@ -639,7 +695,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>Dislike set</p>"
+            "description": "<p>success</p>"
           },
           {
             "group": "Success 200",
@@ -653,7 +709,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"Dislike Set\",\n      data: \"\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"success\",\n      data: \"\"\n}",
           "type": "json"
         }
       ]
@@ -708,7 +764,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>Favourite set</p>"
+            "description": "<p>success</p>"
           },
           {
             "group": "Success 200",
@@ -722,7 +778,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"Favourite set\",\n      data: \"\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"success\",\n      data: \"\"\n}",
           "type": "json"
         }
       ]
