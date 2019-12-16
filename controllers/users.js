@@ -25,7 +25,7 @@ module.exports={
                 return res.status(200).json({
                     message: "Profile Data",
                     data: {
-                        userName: userName,
+                        userName: user.userName,
                         email: email,
                         location: user.location,
                         gender: user.gender,
@@ -265,8 +265,8 @@ module.exports={
                 userName: userNameToSend,
                 email: email,
                 token: jwt.sign({
-                    email: email, 
-                    userName: userNameToSend}, process.env.JWT_SECRET),
+                    email: email
+                }, process.env.JWT_SECRET),
                 mobile: mobile,
                 location: location,
                 gender: gender

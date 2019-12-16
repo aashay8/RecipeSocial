@@ -148,8 +148,7 @@ module.exports = {
                     data: {
                         userName: user.userName,
                         token: jwt.sign({
-                            email: user.email, 
-                            userName: user.userName}, process.env.JWT_SECRET),
+                            email: user.email}, process.env.JWT_SECRET),
                         likes: user.likes,
                         dislikes: user.dislikes,
                         favourites: user.favourites
