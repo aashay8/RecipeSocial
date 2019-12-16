@@ -19,7 +19,7 @@ var authenticate = require('./../services/authentication')
  * @apiGroup Users
  *
  * @apiSuccess {String} message Profile Data
- * @apiSuccess {String} data {userName, email}
+ * @apiSuccess {String} data {userName, email, mobile, location, gender}
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -27,7 +27,10 @@ var authenticate = require('./../services/authentication')
           message: "Profile Data",
           data: {
             userName: userName,
-            email: email
+            email: email,
+            mobile: String,
+            location: String,
+            gender: String
           }
  *     }
  *
@@ -54,7 +57,7 @@ router.post('/profile',authenticate,profileController);
  * @apiParam {String} mobile Mobile number (no checks)
  * 
  * @apiSuccess {String} message Profile successfully updated
- * @apiSuccess {String} data {userName:String, email: String, token, "mobile":String, "location":String, "gender":String}
+ * @apiSuccess {String} data Only fields which are changed(except username) {userName:String, email: String, token, "mobile":String, "location":String, "gender":String}
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -71,7 +74,8 @@ router.post('/profile',authenticate,profileController);
  *     }
  *
  * @apiError AuthenticationError Code 442 Token Error
- *
+ * @apiError DatabaseError Code 500 Database Update Error
+ * 
  * @apiErrorExample Error-Response:
  *     HTTP/1.1 442 Authentication Error
  *     {

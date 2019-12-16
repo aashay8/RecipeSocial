@@ -20,14 +20,21 @@ module.exports={
         // }
         
         let { email, userName } = req.user;
-        console.log(`${email}     ${userName}`)
-            return res.status(200).json({
-                message: "Profile Data",
-                data: {
-                    userName: userName,
-                    email: email
-                }
-            });
+        User.findOne({email})
+        .then((user)=>{
+                return res.status(200).json({
+                    message: "Profile Data",
+                    data: {
+                        userName: userName,
+                        email: email,
+                        location: user.location,
+                        gender: user.gender,
+                        mobile: user.mobile
+
+                    }
+                });
+            }
+        )
         
     },
 
@@ -237,17 +244,29 @@ module.exports={
         if(mobile) objUpdate.mobile = mobile;
 
         let {email} = req.user;
+        let userNameToSend = userName ? userName : req.user.userName;
+        
         User.updateOne({email},
-            {$set: objUpdate},);
-
+            {$set: objUpdate},
+            (err,data)=>{
+                if(err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        message: "Database Update Error",
+                        data: err
+                    })
+                }
+            });
+        
         return res.status(200).json({
             message: "Profile successfully updated",
+            // data: objUpdate
             data: {
-                userName: userName,
+                userName: userNameToSend,
                 email: email,
                 token: jwt.sign({
                     email: email, 
-                    userName: userName}, process.env.JWT_SECRET),
+                    userName: userNameToSend}, process.env.JWT_SECRET),
                 mobile: mobile,
                 location: location,
                 gender: gender

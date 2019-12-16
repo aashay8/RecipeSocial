@@ -171,14 +171,14 @@
             "type": "String",
             "optional": false,
             "field": "data",
-            "description": ""
+            "description": "<p>{userName:String, token, &quot;likes&quot;:[<Array of recipe ids>], &quot;dislikes&quot;:[<Array of recipe ids>], &quot;favourites&quot;:[<Array of recipe ids>]}</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"Successful login\",\n      data: {\n                userName: <String>,\n                token: jwt String of user data\n            }\n}\nHTTP/1.1 200 OK\n{\n      message: \"User already logged in.\",\n      data: \"\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"Successful login\",\n      data: {\n                userName: <String>,\n                token: jwt String of user data,\n                likes: [recipe IDs],\n                dislikes: [recipe IDs],\n                favourites: [recipe IDs],\n            }\n}\nHTTP/1.1 200 OK\n{\n      message: \"User already logged in.\",\n      data: \"\"\n}",
           "type": "json"
         }
       ]
@@ -396,14 +396,14 @@
             "type": "String",
             "optional": false,
             "field": "data",
-            "description": "<p>{userName, email}</p>"
+            "description": "<p>{userName, email, mobile, location, gender}</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"Profile Data\",\n      data: {\n        userName: userName,\n        email: email\n      }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"Profile Data\",\n      data: {\n        userName: userName,\n        email: email,\n        mobile: String,\n        location: String,\n        gender: String\n      }\n}",
           "type": "json"
         }
       ]
@@ -601,75 +601,6 @@
   },
   {
     "type": "post",
-    "url": "/toggleLike",
-    "title": "Like or Remove like from a recipe",
-    "name": "Toggle_Dislike",
-    "group": "Users",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "recipe_id",
-            "description": "<p>Recipe ID to toggle Like status</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>success</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "data",
-            "description": ""
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"success\",\n      data: \"\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "AuthenticationError",
-            "description": "<p>Code 442 Token Error</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 442 Authentication Error\n{\n  \"message\": \"Invalid User\",\n   \"data\": \"\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "routes/users.js",
-    "groupTitle": "Users"
-  },
-  {
-    "type": "post",
     "url": "/toggleDisike",
     "title": "Dislike or remove dislike from a recipe",
     "name": "Toggle_Dislike",
@@ -709,7 +640,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"success\",\n      data: \"\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"success\",\n      data: {\n                likes: [Array of liked recipes],\n                dislikes: [Array of disliked recipes]\n            }\n}",
           "type": "json"
         }
       ]
@@ -778,7 +709,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      message: \"success\",\n      data: \"\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"success\",\n      data: {\n                favourites: [Array of favourited recipes]\n            }\n}",
           "type": "json"
         }
       ]
@@ -798,6 +729,171 @@
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 442 Authentication Error\n{\n  \"message\": \"Invalid User\",\n   \"data\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/users.js",
+    "groupTitle": "Users"
+  },
+  {
+    "type": "post",
+    "url": "/toggleLike",
+    "title": "Like or Remove like from a recipe",
+    "name": "Toggle_like",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "recipe_id",
+            "description": "<p>Recipe ID to toggle Like status</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"success\",\n      data: {\n                likes: [Array of liked recipes],\n                dislikes: [Array of disliked recipes]\n            }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "AuthenticationError",
+            "description": "<p>Code 442 Token Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 442 Authentication Error\n{\n  \"message\": \"Invalid User\",\n   \"data\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/users.js",
+    "groupTitle": "Users"
+  },
+  {
+    "type": "post",
+    "url": "/updateProfile",
+    "title": "Update profile data",
+    "name": "Update_user_s_profile_data",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "userName",
+            "description": "<p>Full Name of user</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "location",
+            "description": "<p>Location</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "gender",
+            "description": "<p>Male/Female/Others (Any string)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>Mobile number (no checks)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Profile successfully updated</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Only fields which are changed(except username) {userName:String, email: String, token, &quot;mobile&quot;:String, &quot;location&quot;:String, &quot;gender&quot;:String}</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"Profile successfully updated\",\n      data: {\n                userName: <String>,\n                email: <String>,\n                token: jwt String of user data,\n                mobile: String,\n                location: String,\n                gender: String\n            }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "AuthenticationError",
+            "description": "<p>Code 442 Token Error</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "DatabaseError",
+            "description": "<p>Code 500 Database Update Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 442 Authentication Error\n{\n  \"message\": \"Token error\",\n   \"data\": \"\"\n}",
           "type": "json"
         }
       ]
