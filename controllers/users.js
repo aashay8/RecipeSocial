@@ -228,5 +228,25 @@ module.exports={
                     }
             })
         })
+    },
+
+    updateProfile: function(req,res,next){
+        let {userName, location, gender, mobile} = req.body;
+        let {email} = req.user;
+        User.update({email},
+            {$set: {userName: userName, location: location, gender: gender, mobile: mobile}});
+
+        return res.status(200).json({
+            message: "Profile successfully updated",
+            data: {
+                userName: user.userName,
+                token: jwt.sign({
+                    email: user.email, 
+                    userName: user.userName}, process.env.JWT_SECRET),
+                likes: user.likes,
+                dislikes: user.dislikes,
+                favourites: user.favourites
+            }
+        })
     }
 }

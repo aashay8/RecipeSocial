@@ -7,7 +7,8 @@ var {
     toggleFavourites: toggleFavouritesController,
     getLikesList: getLikesListController,
     getFavouritesList: getFavouritesListController,
-    getPreferenceList: getPreferenceListController
+    getPreferenceList: getPreferenceListController,
+    updateProfile: updateProfileController
 } = require('./../controllers/users')
 
 var authenticate = require('./../services/authentication')
@@ -41,6 +42,38 @@ var authenticate = require('./../services/authentication')
  *     }
  */
 router.post('/profile',authenticate,profileController);
+
+/**
+ * @api {post} /updateProfile Update profile data - Send all data, not just edited data
+ * @apiName Update user's profile data
+ * @apiGroup Users
+ *
+ * @apiSuccess {String} message Profile successfully updated
+ * @apiSuccess {String} data {userName:String, token, "likes":[<Array of recipe ids>], "dislikes":[<Array of recipe ids>], "favourites":[<Array of recipe ids>]}
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+          message: "Profile successfully updated",
+          data: {
+                    userName: <String>,
+                    token: jwt String of user data,
+                    likes: [recipe IDs],
+                    dislikes: [recipe IDs],
+                    favourites: [recipe IDs],
+                }
+ *     }
+ *
+ * @apiError AuthenticationError Code 442 Token Error
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 442 Authentication Error
+ *     {
+ *       "message": "Token error",
+ *        "data": ""
+ *     }
+ */
+router.post('/updateProfile',authenticate,updateProfileController);
 
 /**
  * @api {post} /toggleLike Like or Remove like from a recipe

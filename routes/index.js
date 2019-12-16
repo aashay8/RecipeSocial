@@ -64,7 +64,7 @@ router.post('/register', validate(register),registerController);
  * @apiParam {String} password Password of the user
  *  
  * @apiSuccess {String} message Successful login
- * @apiSuccess {String} data
+ * @apiSuccess {String} data {userName:String, token, "likes":[<Array of recipe ids>], "dislikes":[<Array of recipe ids>], "favourites":[<Array of recipe ids>]}
  * 
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -72,7 +72,10 @@ router.post('/register', validate(register),registerController);
           message: "Successful login",
           data: {
                     userName: <String>,
-                    token: jwt String of user data
+                    token: jwt String of user data,
+                    likes: [recipe IDs],
+                    dislikes: [recipe IDs],
+                    favourites: [recipe IDs],
                 }
  *     }
  *     HTTP/1.1 200 OK
