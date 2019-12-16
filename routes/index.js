@@ -164,6 +164,7 @@ router.post('/forgotPassword', validate(forgotPassword), forgotPwdController);
  * @apiGroup Index
  *
  * @apiParam {String} email Email of the user
+ * @apiParam {String} newPassword new Password to set for user 
  *  
  * @apiSuccess {String} message Password reset
  * @apiSuccess {String} data
