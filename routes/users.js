@@ -48,6 +48,11 @@ router.post('/profile',authenticate,profileController);
  * @apiName Update user's profile data
  * @apiGroup Users
  *
+ * @apiParam {String} userName Full Name of user
+ * @apiParam {String} location Location
+ * @apiParam {String} gender Male/Female/Others (Any string)
+ * @apiParam {String} mobile Mobile number (no checks)
+ * 
  * @apiSuccess {String} message Profile successfully updated
  * @apiSuccess {String} data {userName:String, token, "likes":[<Array of recipe ids>], "dislikes":[<Array of recipe ids>], "favourites":[<Array of recipe ids>]}
  *
@@ -58,9 +63,9 @@ router.post('/profile',authenticate,profileController);
           data: {
                     userName: <String>,
                     token: jwt String of user data,
-                    likes: [recipe IDs],
-                    dislikes: [recipe IDs],
-                    favourites: [recipe IDs],
+                    mobile: String,
+                    location: String,
+                    gender: String
                 }
  *     }
  *
