@@ -79,8 +79,7 @@ module.exports={
                 message: "success",
                 data: {
                     likes: user.likes,
-                    dislikes: user.dislikes,
-                    favourites: user.favourites
+                    dislikes: user.dislikes
                 }
             })
         });
@@ -128,8 +127,7 @@ module.exports={
                 message: "success",
                 data: {
                     likes: user.likes,
-                    dislikes: user.dislikes,
-                    favourites: user.favourites
+                    dislikes: user.dislikes
                 }
             })
         });
@@ -170,8 +168,6 @@ module.exports={
             return res.status(200).json({
                 message: "success",
                 data: {
-                    likes: user.likes,
-                    dislikes: user.dislikes,
                     favourites: user.favourites
                 }
             })
@@ -248,6 +244,7 @@ module.exports={
             message: "Profile successfully updated",
             data: {
                 userName: userName,
+                email: email,
                 token: jwt.sign({
                     email: email, 
                     userName: userName}, process.env.JWT_SECRET),

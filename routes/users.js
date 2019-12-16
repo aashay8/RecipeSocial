@@ -54,7 +54,7 @@ router.post('/profile',authenticate,profileController);
  * @apiParam {String} mobile Mobile number (no checks)
  * 
  * @apiSuccess {String} message Profile successfully updated
- * @apiSuccess {String} data {userName:String, token, "likes":[<Array of recipe ids>], "dislikes":[<Array of recipe ids>], "favourites":[<Array of recipe ids>]}
+ * @apiSuccess {String} data {userName:String, email: String, token, "mobile":String, "location":String, "gender":String}
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -62,6 +62,7 @@ router.post('/profile',authenticate,profileController);
           message: "Profile successfully updated",
           data: {
                     userName: <String>,
+                    email: <String>,
                     token: jwt String of user data,
                     mobile: String,
                     location: String,
@@ -82,7 +83,7 @@ router.post('/updateProfile',authenticate,updateProfileController);
 
 /**
  * @api {post} /toggleLike Like or Remove like from a recipe
- * @apiName Toggle Dislike
+ * @apiName Toggle like
  * @apiGroup Users
  *
  * @apiParam {String} recipe_id Recipe ID to toggle Like status
@@ -96,8 +97,7 @@ router.post('/updateProfile',authenticate,updateProfileController);
           message: "success",
           data: {
                     likes: [Array of liked recipes],
-                    dislikes: [Array of disliked recipes],
-                    favourites: [Array of favourited recipes]
+                    dislikes: [Array of disliked recipes]
                 }
  *     }
  *
@@ -130,8 +130,7 @@ router.post('/toggleLike',authenticate,toggleLikeController);
           message: "success",
           data: {
                     likes: [Array of liked recipes],
-                    dislikes: [Array of disliked recipes],
-                    favourites: [Array of favourited recipes]
+                    dislikes: [Array of disliked recipes]
                 }
  *     }
  *
@@ -162,8 +161,6 @@ router.post('/toggleDislike',authenticate,toggleDislikeController);
  *     {
           message: "success",
           data: {
-                    likes: [Array of liked recipes],
-                    dislikes: [Array of disliked recipes],
                     favourites: [Array of favourited recipes]
                 }
  *     }
