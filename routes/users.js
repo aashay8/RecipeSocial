@@ -44,7 +44,7 @@ var authenticate = require('./../services/authentication')
 router.post('/profile',authenticate,profileController);
 
 /**
- * @api {post} /updateProfile Update profile data - Send all data, not just edited data
+ * @api {post} /updateProfile Update profile data
  * @apiName Update user's profile data
  * @apiGroup Users
  *

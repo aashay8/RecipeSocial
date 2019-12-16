@@ -232,20 +232,28 @@ module.exports={
 
     updateProfile: function(req,res,next){
         let {userName, location, gender, mobile} = req.body;
+        let objUpdate = {};
+        
+        //To take care of nulls in body
+        if(userName) objUpdate.userName = userName;
+        if(location) objUpdate.location = location;
+        if(gender) objUpdate.gender = gender;
+        if(mobile) objUpdate.mobile = mobile;
+
         let {email} = req.user;
-        User.update({email},
-            {$set: {userName: userName, location: location, gender: gender, mobile: mobile}});
+        User.updateOne({email},
+            {$set: objUpdate},);
 
         return res.status(200).json({
             message: "Profile successfully updated",
             data: {
-                userName: user.userName,
+                userName: userName,
                 token: jwt.sign({
-                    email: user.email, 
-                    userName: user.userName}, process.env.JWT_SECRET),
-                likes: user.likes,
-                dislikes: user.dislikes,
-                favourites: user.favourites
+                    email: email, 
+                    userName: userName}, process.env.JWT_SECRET),
+                mobile: mobile,
+                location: location,
+                gender: gender
             }
         })
     }
