@@ -33,9 +33,11 @@ module.exports = {
                         from: process.env.SMTP_FROM_MAIL,
                         to: email,
                         subject: 'Account Verification Mail',
-                        text: `Please click below link to verify your email: 
-                        http://localhost:${process.env.PORT}/accVerification/${verificationCode}
+                        text: `Please click below code to verify your email: 
+                            ${verificationCode}
                         `
+                        // http://localhost:${process.env.PORT}/accVerification/${verificationCode}
+                     
                     }, function (err, data) {
                         if (err)
                             return res.status(502).json({
