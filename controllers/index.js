@@ -11,7 +11,7 @@ module.exports = {
 
     //Register Functionality
     register: function(req, res, next){
-        let { userName, email, password } = req.body;
+        let { userName, email, password, consumerURLverification } = req.body;
       
         //check if user already exists
        User.findOne({email: email})
@@ -33,8 +33,9 @@ module.exports = {
                         from: process.env.SMTP_FROM_MAIL,
                         to: email,
                         subject: 'Account Verification Mail',
-                        text: `Please click below code to verify your email: 
-                            ${verificationCode}
+                        text: `Please find below code to verify your email: 
+                            ${verificationCode}.
+                            URL for verification: ${consumerURLverification}
                         `
                         // http://localhost:${process.env.PORT}/accVerification/${verificationCode}
                      

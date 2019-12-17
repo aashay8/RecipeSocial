@@ -32,6 +32,7 @@ router.post('/', function(req,res,next){
  * @apiParam {String} userName Name of the user
  * @apiParam {String} email Email of the user
  * @apiParam {String} password Password of the user
+ * @apiParam {String} consumerURLverification URL of API consumer where verification code needs to be input
  *  
  * @apiSuccess {String} message User Successfully registered
  *
