@@ -84,7 +84,7 @@ router.post('/register', validate(register),registerController);
           data: ""
  *     }
  *
- * @apiError VerificationError Code 200 Account not verified 
+ * @apiError VerificationError Code 401 Account not verified 
  * @apiError InvalidUser Code 401 Invalid Username
  * @apiError InvalidPassword Code 401 Invalid Password           
  *

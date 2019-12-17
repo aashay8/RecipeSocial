@@ -132,7 +132,7 @@ module.exports = {
                 });
             }
             if(!user.isVerified){
-                return res.status(200).json({
+                return res.status(401).json({
                     message: "Account not verified",
                     data: {token: jwt.sign({login_count: login_count+1}, process.env.JWT_SECRET)}
                 });
