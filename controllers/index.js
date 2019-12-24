@@ -17,7 +17,7 @@ module.exports = {
        User.findOne({email: email})
        .then(function (user){
             if(user){
-                return res.status(200).json({
+                return res.status(409).json({
                     message: "User already exists in database",
                     data: ""
                 })

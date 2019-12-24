@@ -44,7 +44,7 @@ router.post('/', function(req,res,next){
  *     }
  *
  * @apiError MailServerError Code 502 Verification mail not sent successfully
- * @apiError ExistingUser Code 200 User already exists in database
+ * @apiError ExistingUser Code 409 User already exists in database
  *           
  *
  * @apiErrorExample Error-Response:
