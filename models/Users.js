@@ -9,12 +9,19 @@ var userData = new Schema({
     gender: String,
     mobile: String,
     verificationCode: String,
-    isVerified: {type: Boolean, default: false},
+    isVerified: { type: Boolean, default: false },
     passwordResetCode: String,
     passwordExpiryDate: Date,
     likes: [String],
     favourites: [String],
-    dislikes: [String]
+    dislikes: [String],
+    // commentsList: [{
+    //     recipe_id: String,
+    //     comments: [{ userId: String, text: String, timeStamp: Date, privacy: Number }]
+    // }],
+    friendsList: [String],
+    sentRequestList: [String],
+    pendingRequestList: [String]
 });
 
 module.exports = mongoose.model('Users', userData);

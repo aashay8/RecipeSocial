@@ -8,7 +8,13 @@ var {
     getLikesList: getLikesListController,
     getFavouritesList: getFavouritesListController,
     getPreferenceList: getPreferenceListController,
-    updateProfile: updateProfileController
+    updateProfile: updateProfileController,
+    userList: userListController,
+    getUserComments: getUserCommentsController,
+    addComment: addCommentController,
+    getUserFriendsDetails: getUserFriendsDetailsController,
+    getUserSentRequests: getUserSentRequestsController,
+    getUserPendingRequests: getUserPendingRequestsController
 } = require('./../controllers/users')
 
 var authenticate = require('./../services/authentication')
@@ -265,5 +271,41 @@ router.post('/getFavouritesList',authenticate,getFavouritesListController);
  *     }
  */
 router.post('/getPreferenceList',authenticate,getPreferenceListController);
+
+/**
+ * @api {post} /getUserComments Retrieve list of comments and privacy
+ * @apiName Retrieve list of comments and privacy
+ * @apiGroup Users
+ *
+ * @apiSuccess {String} message List of comments
+ * @apiSuccess {String} data {"comments":[{ userId: String, text: String, timeStamp: Date, privacy: Number }]}
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+          message: "List of comments",
+          data: {comments: [{ userId: String, text: String, timeStamp: Date, privacy: Number }]}
+ *     }
+ *
+ * @apiError AuthenticationError Code 442 Token Error
+ * @apiError AuthenticationError Code 442 Invalid User
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 442 Authentication Error
+ *     {
+ *       "message": "Invalid User",
+ *        "data": ""
+ *     }
+ */
+
+router.get('/userList',authenticate,userListController);
+
+router.post('/getUserComments',authenticate,getUserCommentsController);
+
+router.post('/addComment',authenticate,addCommentController);
+
+router.post('/getUserFriendsDetails',authenticate,getUserFriendsDetailsController);
+router.post('/getUserSentRequests',authenticate,getUserSentRequestsController);
+router.post('/getUserPendingRequests',authenticate,getUserPendingRequestsController);
 
 module.exports = router;

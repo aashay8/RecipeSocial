@@ -190,7 +190,7 @@ define({ "api": [
             "group": "Error 4xx",
             "optional": false,
             "field": "VerificationError",
-            "description": "<p>Code 200 Account not verified</p>"
+            "description": "<p>Code 401 Account not verified</p>"
           },
           {
             "group": "Error 4xx",
@@ -247,6 +247,13 @@ define({ "api": [
             "optional": false,
             "field": "password",
             "description": "<p>Password of the user</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "consumerURLverification",
+            "description": "<p>URL of API consumer where verification code needs to be input</p>"
           }
         ]
       }
@@ -284,7 +291,7 @@ define({ "api": [
             "group": "Error 4xx",
             "optional": false,
             "field": "ExistingUser",
-            "description": "<p>Code 200 User already exists in database</p>"
+            "description": "<p>Code 409 User already exists in database</p>"
           }
         ]
       },
@@ -315,6 +322,13 @@ define({ "api": [
             "optional": false,
             "field": "email",
             "description": "<p>Email of the user</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "newPassword",
+            "description": "<p>new Password to set for user</p>"
           }
         ]
       }
@@ -423,6 +437,62 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "HTTP/1.1 442 Authentication Error\n{\n  \"message\": \"Invalid User\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/users.js",
+    "groupTitle": "Users"
+  },
+  {
+    "type": "post",
+    "url": "/getUserComments",
+    "title": "Retrieve list of comments and privacy",
+    "name": "Retrieve_list_of_comments_and_privacy",
+    "group": "Users",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>List of comments</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>{&quot;comments&quot;:[{ userId: String, text: String, timeStamp: Date, privacy: Number }]}</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n      message: \"List of comments\",\n      data: {comments: [{ userId: String, text: String, timeStamp: Date, privacy: Number }]}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "AuthenticationError",
+            "description": "<p>Code 442 Token Error</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 442 Authentication Error\n{\n  \"message\": \"Invalid User\",\n   \"data\": \"\"\n}",
           "type": "json"
         }
       ]

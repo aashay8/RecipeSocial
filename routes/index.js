@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const rateLimit = require("express-rate-limit");
 var {validate,
       rules: {
             register,
@@ -8,6 +9,9 @@ var {validate,
             resetPassword
           }
   } = require('../utils/validateFields');
+
+  var regexCheck = require('../services/regex_safe_check')
+
 var {
   register: registerController,
   login: loginController,
@@ -16,6 +20,13 @@ var {
   resetPwd: resetPwdController,
   profile: profileController
 } = require('./../controllers/index')
+ 
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // limit each IP to 5 requests per windowMs
+  message: 'Login attempts exceeded maximum tries. Try again after some time.'
+});
+
 
 router.post('/', function(req,res,next){
   //check if token present - go to profile
@@ -96,7 +107,7 @@ router.post('/register', validate(register),registerController);
  *        data: JWT String of {login_count: <Number>}
  *     }
  */
-router.post('/login', validate(login),loginController);
+router.post('/login',loginLimiter, validate(login),loginController);
 
 /**
  * @api {get} /accVerification/:code Account verification via mail API
